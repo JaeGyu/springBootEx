@@ -28,7 +28,6 @@ public class AccountController {
 	public ResponseEntity createAccount(@RequestBody @Valid AccountDto.Create create, BindingResult result) {
 
 		if (result.hasErrors()) {
-			System.out.println("400에러 발생");
 
 			// TODO 에러 응답 본문 추가하기
 			return new ResponseEntity(HttpStatus.BAD_REQUEST);
