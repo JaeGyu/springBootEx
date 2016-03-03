@@ -42,4 +42,9 @@ public class AccountController {
 	public String hello() {
 		return "Hello Spring Boot";
 	}
+	
+	@RequestMapping("/")
+	public String index(){
+		return "index 페이지 입니다.";
+	}
 }
