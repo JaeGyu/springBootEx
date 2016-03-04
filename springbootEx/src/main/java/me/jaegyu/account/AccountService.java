@@ -33,6 +33,9 @@ public class AccountService {
 		 * */
 		Account account = modelMapper.map(dto, Account.class);
 		
+		/*
+		 * modelMapper로 해도 되지만 아래처럼 BeanUtils.copyProperties로 해도 됨
+		 * */
 //		Account account = new Account();
 //		BeanUtils.copyProperties(dto, account);
 		
