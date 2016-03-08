@@ -1,5 +1,7 @@
 package me.jaegyu.book;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.undertow.attribute.RequestMethodAttribute;
 
 @RestController
 public class BookController {
@@ -27,6 +31,14 @@ public class BookController {
 		Book newBook = service.createBook(create);
 
 		return new ResponseEntity<Object>(newBook, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public ResponseEntity<Object> getBooks() {
+
+		List<Book> books = service.getBooks();
+
+		return new ResponseEntity<Object>(books, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)

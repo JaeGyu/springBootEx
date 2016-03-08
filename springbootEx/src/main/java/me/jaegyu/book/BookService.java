@@ -1,6 +1,7 @@
 package me.jaegyu.book;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -27,5 +28,9 @@ public class BookService {
 		book.setUpdated(now);
 
 		return repository.save(book);
+	}
+	
+	public List<Book> getBooks(){
+		return repository.findAll();
 	}
 }
