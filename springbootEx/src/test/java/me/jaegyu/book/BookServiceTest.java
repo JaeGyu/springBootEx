@@ -23,8 +23,13 @@ public class BookServiceTest {
 
 		service.createBook(createDto);
 
-		System.out.println(service.getBooks());
+		createDto.clear();
+		createDto.setName("자바의 정석");
+		createDto.setAuthor("남궁성");
+		createDto.setPrice(25000l);
+		service.createBook(createDto);
 
+		System.out.println(service.getBooks());
 	}
 
 }

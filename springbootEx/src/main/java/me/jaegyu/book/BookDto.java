@@ -21,6 +21,12 @@ public class BookDto {
 		private String author;
 
 		private Long price;
+		
+		public void clear(){
+			this.name = null;
+			this.author = null;
+			this.price = 0l;
+		}
 	}
 
 	@Data
