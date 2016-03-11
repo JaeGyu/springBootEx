@@ -3,6 +3,7 @@ package springboot.book.ex;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class CustomerRestController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-//	@ResponseStatus(HttpStatu)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Customer postCustomers(@RequestBody Customer customer){
 		return customerService.create(customer);
 	}
