@@ -27,7 +27,7 @@
     	<dependency>
         	<groupId>org.springframework.data</groupId>
         	<artifactId>spring-data-rest-webmvc</artifactId>
-        	<version>2.4.4.RELEASE</version>
+<!--         	<version>2.4.4.RELEASE</version> -->
     	</dependency>
 
 		<!-- 아래에 버전이 없는 것은 스프링 부트가 알아서 최적화된 버전을 가져온다. -->
@@ -59,15 +59,15 @@
 			<version>0.7.5</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security.oauth</groupId> -->
+<!-- 			<artifactId>spring-security-oauth2</artifactId> -->
+<!-- 		</dependency> -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.boot</groupId> -->
+<!-- 			<artifactId>spring-boot-starter-jersey</artifactId> -->
+<!-- 		</dependency> -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.springframework.boot</groupId> -->
 <!-- 			<artifactId>spring-boot-starter-undertow</artifactId> -->
