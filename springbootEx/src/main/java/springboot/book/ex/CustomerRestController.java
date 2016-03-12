@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("api/customers")
 public class CustomerRestController {
@@ -29,10 +28,22 @@ public class CustomerRestController {
 	public Customer getCustomer(@PathVariable Integer id) {
 		return customerService.findOne(id);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public Customer postCustomers(@RequestBody Customer customer){
+	public Customer postCustomers(@RequestBody Customer customer) {
 		return customerService.create(customer);
+	}
+
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public Customer putCustomer(@PathVariable Integer id, @RequestBody Customer customer) {
+		customer.setId(id);
+		return customerService.update(customer);
+	}
+
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteCustomer(@PathVariable Integer id) {
+		customerService.delete(id);
 	}
 }
