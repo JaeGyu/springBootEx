@@ -44,7 +44,7 @@ public class CustomerRestController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(location);
 		
-		return new ResponseEntity<>(); 
+		return new ResponseEntity<>(created, headers, HttpStatus.CREATED); 
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
