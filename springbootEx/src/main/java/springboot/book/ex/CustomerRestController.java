@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +24,14 @@ public class CustomerRestController {
 
 	@Autowired
 	private CustomerService customerService;
-
+	
+	/*
+	 * @PageableDefault에 의해서 page정보가 안넘어오면
+	 * 디폴트로 page=0, size=20을 지정 한다.
+	 * */
 	@RequestMapping(method = RequestMethod.GET)
-	List<Customer> getCustomers() {
-		List<Customer> customers = customerService.findAll();
-		return customers;
+	public List<Customer> getCustomers(@PageableDefault Pageable pageable) {
+		return customerService.findAll(pageable).getContent();
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)

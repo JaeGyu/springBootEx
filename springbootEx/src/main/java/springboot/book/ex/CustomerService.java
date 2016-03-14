@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +34,10 @@ public class CustomerService {
 
 	public void delete(Integer id) {
 		customerRepository.delete(id);
+	}
+
+	public Page<Customer> findAll(Pageable pageable) {
+		return customerRepository.findAllOrderByNameWithPaging(pageable);
 	}
 
 }
