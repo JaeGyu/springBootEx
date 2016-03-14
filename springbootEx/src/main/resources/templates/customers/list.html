@@ -5,6 +5,24 @@
 	<title>고객 목록</title>
 </head>
 <body>
+	<div>
+		<form th:action="@{customers/create}" th:object="${customerForm}" method="post">
+			<dl>
+				<dt><label for="lastName">성</label></dt>
+				<dd>
+					<input type="text" id="lastName" name="lastName" th:field="*{lastName}" th:errorclass="error-input" value="홍"/>
+					<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-messages">error!</span>
+				</dd>
+				<dt><label for="firstName">이름</label></dt>
+				<dd>
+					<input type="text" id="firstName" name="firstName" th:field="*{firstName}" th:errorclass="error-input" value="길동"/>
+					<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-messages">error!</span>
+				</dd>
+			</dl>
+			<input type="submit" value="작성"/>
+		</form>
+	</div>
+	<hr/>
 	<table class="table table-striped table-bordered table-condendes">
 		<tr th:each="customer : ${customers}">
 			<td th:text="${customer.id}">100</td>
