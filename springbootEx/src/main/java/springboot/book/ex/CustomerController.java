@@ -55,7 +55,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "create2", method = RequestMethod.POST)
-	public String create2(@RequestBody @Validated CustomerForm form, BindingResult result, Model model) {
+	public String create2(@ModelAttribute @Validated CustomerForm form, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return list(model);
 		}
