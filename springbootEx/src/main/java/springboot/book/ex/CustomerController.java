@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -51,20 +50,6 @@ public class CustomerController {
 		BeanUtils.copyProperties(form, customer);
 		customerService.create(customer);
 
-		return "redirect:/customers";
-	}
-	
-	@RequestMapping(value = "create2", method = RequestMethod.POST)
-	public String create2(@ModelAttribute @Validated CustomerForm form, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return list(model);
-		}
-
-		Customer customer = new Customer();
-		BeanUtils.copyProperties(form, customer);
-		customerService.create(customer);
-		
-		System.out.println("create2 실행!!");
 		return "redirect:/customers";
 	}
 	
