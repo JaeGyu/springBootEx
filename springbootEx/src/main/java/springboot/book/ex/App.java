@@ -33,6 +33,7 @@ public class App implements CommandLineRunner {
 
 		Pageable pageable = new PageRequest(1, 2);
 		customerRepository.findAllOrderByNameWithPaging(pageable).forEach(System.out::println);
+		customerRepository.findAll(pageable).forEach(System.out::println);
 
 	}
 
