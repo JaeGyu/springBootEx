@@ -6,5 +6,18 @@
 </head>
 <body>
 <p th:text="${'Hello ' + name + '!'}"></p>
+<p th:id="${'id-'+name}" th:class="${'class-'+name}" 
+	th:name="${'name-'+name}" th:text="${'tag attrubute test'}"></p>
+	
+<!-- 사용자 정의 속성 하나일 경우 -->
+<p th:id="${'id2-'+name}" th:attr="mydata=${'newdata-'+name}"
+   th:text="${'custom attribute test'}"></p>
+   
+<!-- 사용자 속성 여러개 일 경우 및 id, class 도 포함 할 수 있음-->
+<!-- 그러나 th:text는 따로 설정 해야 함 -->
+<p data-th-attr="just=${'just-'+name}, foo=${'foo-'+name}"
+   th:text="${'many attribute test'}"></p>
+
+<p data-th-attr="text=${'text입니다.'}"></p>
 </body>
 </html>
