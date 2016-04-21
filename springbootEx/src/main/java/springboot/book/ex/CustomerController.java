@@ -1,6 +1,7 @@
 package springboot.book.ex;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class CustomerController {
 
 	/*
 	 * @RequestMapping으로 매핑된 메서드보다 먼저 실행 된다.
+	 * 즉 클라이언트 쪽에서 보낸 파라매터를 매핑 하기 전에 객체를 준비 한다.  
+	 * 그리고 생성되어서 리턴 되는 객체는 Model 객체에 자동으로 등록 된다. 
+	 * list메서드와 create메서드가 실행되기전 먼저 실행 된다. 
 	 * */
 	@ModelAttribute
 	CustomerForm setUpForm() {
@@ -31,6 +35,9 @@ public class CustomerController {
 	public String list(Model model) {
 		List<Customer> customers = customerService.findAll();
 		model.addAttribute("customers", customers);
+
+		Map<String, Object> asMap = model.asMap();
+
 		return "customers/list";
 	}
 	
