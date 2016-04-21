@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+</head>
+<body>
+<header th:replace="mvctest/header :: header">
+	<p>This is default header area for default layout</p>
+</header>
+<section id="content" layout:fragment="content">
+	<p th:text="${'Hello } + name +'!'"></p>
+	<p>This is default main content with default layout</p>
+</section>
+<footer th:replace="mvctest/footer :: footer">
+	<p>This is default footer area for default layout</p>
+</footer>
+</body>
+</html>
