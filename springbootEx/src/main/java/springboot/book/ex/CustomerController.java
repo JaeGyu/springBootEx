@@ -34,6 +34,7 @@ public class CustomerController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Customer> customers = customerService.findAll();
+		
 		model.addAttribute("customers", customers);
 
 		Map<String, Object> asMap = model.asMap();
