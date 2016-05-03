@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf8"/>
+<title>고객 정보 편집</title>
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css" 
+	th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<form th:action="@{/customers/edit}" th:object="${customerForm}" method="post">
+		<dl>
+			<dt><label for="lastName" class="col-sm-2 control-label">성</label></dt>
+			<dd>
+				<input type="text" id="lastName" name="lastName" th:field="*{lastName}" class="form-control" value="홍"/>
+				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="help-block">error!</span>
+			</dd>
+			
+			<dt><label for="firstName" class="col-sm-2 control-label">명</label></dt>
+			<dd>
+				<input type="text" id="firstName" name="firstName" th:field="*{firstName}" class="form-control" value="길동"/>
+				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="help-block">error!</span>
+			</dd>
+		</dl>
+	</form>	
+</body>
+</html>
