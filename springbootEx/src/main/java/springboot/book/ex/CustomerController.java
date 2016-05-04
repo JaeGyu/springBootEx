@@ -64,10 +64,33 @@ public class CustomerController {
 	
 	@RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
 	public String editForm(@RequestParam Integer id, CustomerForm form) {
+		
 		Customer customer = customerService.findOne(id);
 		BeanUtils.copyProperties(customer, form);
 		
 		return "customers/edit";
 	}
+	
+	@RequestMapping(value = "edit", params = "goToTop")
+	public String goToTop() {
+		
+		return "redirect:/customers";
+	}
+	
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	public String edit(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			return editForm(id, form);
+		}
+
+		Customer customer = new Customer();
+		BeanUtils.copyProperties(form, customer);
+		customer.setId(id);
+		customerService.update(customer);
+
+		return "redirect:/customers";
+	}
+	
 	
 }
