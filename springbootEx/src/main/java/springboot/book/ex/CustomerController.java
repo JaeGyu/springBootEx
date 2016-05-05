@@ -92,5 +92,12 @@ public class CustomerController {
 		return "redirect:/customers";
 	}
 	
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public String edit(@RequestParam Integer id) {
+		customerService.delete(id);
+
+		return "redirect:/customers";
+	}
+	
 	
 }
