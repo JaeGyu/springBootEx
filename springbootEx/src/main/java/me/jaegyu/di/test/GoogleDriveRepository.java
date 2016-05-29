@@ -2,7 +2,7 @@ package me.jaegyu.di.test;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("googledrive")
 public class GoogleDriveRepository implements Repository {
 
 	@Override

@@ -1,12 +1,13 @@
 package me.jaegyu.di.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DiTestService {
 
-	@Autowired
+	@Qualifier("googledrive")
 	Repository repository;
 
 	public void store() {
