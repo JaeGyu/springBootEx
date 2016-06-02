@@ -1,8 +1,5 @@
 package me.jaegyu.jpa;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +9,7 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity(name = "tbl_order")
 @NoArgsConstructor
