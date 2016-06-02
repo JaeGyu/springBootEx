@@ -1,10 +1,8 @@
 package me.jaegyu.jpa;
 
 import static org.junit.Assert.*;
-
 import java.util.Date;
 
-import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +24,6 @@ public class UserRepositoryTest {
 		user = new User("홍길동", "길동", "서울시", new Date());
 		user.addOrder(new Order("주문1", "빨리요~", 100, user));
 		user.addOrder(new Order("주문2", "어서요", 1000, user));
-
 		userRepository.save(user);
 		userRepository.flush();
 	}
@@ -34,8 +31,9 @@ public class UserRepositoryTest {
 	@Test
 	public void testFind() throws Exception {
 		User findUser = userRepository.findOne(user.getId());
+//		System.out.println(findUser); // 양방향으로 매핑 되어 있는 경우 ValueObject를 println으로 출력하면 안됨 
+		System.out.println(findUser.getAddress());
 		
-		System.out.println(findUser);
-//		assertEquals(user.getId(), findUser.getId());
+		assertEquals(user.getId(), findUser.getId());
 	}
 }

@@ -16,9 +16,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name = "tbl_user")
 @NoArgsConstructor
+@Setter
+@Getter
+@ToString
 public class User extends AbstractPersistable<Integer> {
 	private String userName;
 	private String nickName;
@@ -40,52 +44,6 @@ public class User extends AbstractPersistable<Integer> {
 
 	public void addOrder(Order order) {
 		this.orders.add(order);
-	}
-
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", nickName=" + nickName + ", address=" + address + ", createDate="
-				+ createDate + ", orders=" + orders + "]";
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
 	}
 
 }
