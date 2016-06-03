@@ -69,6 +69,12 @@
 			<version>3.3.4</version>
 		</dependency>
 		
+		<!-- DB 마이그레이션 툴 -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.springframework.security.oauth</groupId> -->
 <!-- 			<artifactId>spring-security-oauth2</artifactId> -->
