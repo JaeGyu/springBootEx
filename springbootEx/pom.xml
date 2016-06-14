@@ -69,6 +69,12 @@
 			<version>3.3.4</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angularjs</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		
 		<!-- DB 마이그레이션 툴 -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
