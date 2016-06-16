@@ -19,6 +19,13 @@
 	<input type="text" ng-model="name"/>
 	<p>1-Way</p>
 	<input type="text" value="{{name}}"/>
+	<hr/>
+	<p>Invoice</p>
+	<div ng-controller="invoiceController as invoice">
+		<input type="text" ng-model="invoice.qty"/>
+		<input type="text" ng-model="invoice.cost"/>
+		<button ng-click="invoice.pay()" >PAY</button>
+	</div>
 </body>
 <script>
 	var app = angular.module("myApp", []);
@@ -34,6 +41,17 @@
 	
 	app.run(function($rootScope){ //run은 모듈이 실행될때 추가적인 작업을 해주고자 사용한다.
 		$rootScope.global = "전역 스코프 입니다.";
+	});
+	
+	app.controller("invoiceController",function($scope){
+		var invoice = this;
+		
+		invoice.qty = 1;
+		invoice.cost = 2.5;
+		invoice.pay = function(){
+			console.log(invoice.qty * invoice.cost + "를 지불 해야 합니다.");
+		}
+		
 	});
 </script>
 </html>
