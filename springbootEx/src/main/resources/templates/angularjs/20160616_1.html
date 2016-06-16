@@ -25,6 +25,8 @@
 		<input type="text" ng-model="invoice.qty"/>
 		<input type="text" ng-model="invoice.cost"/>
 		<button ng-click="invoice.pay()" >PAY</button>
+		<p>버튼 눌러야 되는 total : {{invoice.total}}</p>
+		<p>실시간 total : {{invoice.qty * invoice.cost}}</p>
 	</div>
 </body>
 <script>
@@ -48,8 +50,10 @@
 		
 		invoice.qty = 1;
 		invoice.cost = 2.5;
+		invoice.total = 0;
 		invoice.pay = function(){
 			console.log(invoice.qty * invoice.cost + "를 지불 해야 합니다.");
+			invoice.total = invoice.qty * invoice.cost;
 		}
 		
 	});
