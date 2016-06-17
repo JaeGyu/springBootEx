@@ -29,7 +29,7 @@
 			<td>{{member.id}}</td>
 			<td>{{member.name}}</td>
 			<td>{{member.date}}</td>
-			<td><button ng-click="submit(member)">처리</button></td>
+			<td><button class="btn btn-primary" ng-click="submit(member)">처리</button></td>
 		</tr>
 	</table>
 </div>
@@ -59,8 +59,6 @@
 		$scope.submit = function(member){
 			console.log(member.name + "님 요청을 처리 했습니다.");
 		}
-		
 	});
-	
 </script>
 </html>
