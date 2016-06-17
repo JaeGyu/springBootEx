@@ -7,15 +7,32 @@
 <!-- <script -->
 <!-- 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script> -->
 <!-- </head> -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" 
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"/>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" 
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
 
 <div ng-controller="membersController">
-	<ul ng-repeat="member in members">
-		<li>{{member.id}} | {{member.name}} | {{member.date}} <button ng-click="submit(member)">처리</button></li>
-	</ul>
+	<table class="table table-striped table-bordered table-condendes">
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>날짜</th>
+			<th>처리</th>
+		</tr>
+		<tr ng-repeat="member in members">
+			<td>{{member.id}}</td>
+			<td>{{member.name}}</td>
+			<td>{{member.date}}</td>
+			<td><button ng-click="submit(member)">처리</button></td>
+		</tr>
+	</table>
 </div>
-
 </body>
 <script>
 	var app = angular.module("sample",[]);
