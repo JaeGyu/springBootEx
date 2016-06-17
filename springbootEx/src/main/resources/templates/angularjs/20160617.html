@@ -10,25 +10,40 @@
 </head>
 <body>
 
+<div ng-controller="membersController">
+	<ul ng-repeat="member in members">
+		<li>{{member.id}} | {{member.name}} | {{member.date}} <button ng-click="submit(member)">처리</button></li>
+	</ul>
+</div>
+
 </body>
 <script>
-	var data = [{
-		"date" : "2016-06-10",
-		"name" : "홍길동",
-		"id"   : "001",
-		"flag" : false
-	},{
-		"date" : "2016-06-11",
-		"name" : "김수동",
-		"id"   : "002",
-		"flag" : false
-	},{
-		"date" : "2016-06-12",
-		"name" : "이민석",
-		"id"   : "003",
-		"flag" : false 
-	}];
-
 	var app = angular.module("sample",[]);
+	
+	app.controller("membersController", function($scope){
+		var data = [{
+			"date" : "2016-06-10",
+			"name" : "홍길동",
+			"id"   : "001",
+			"flag" : false
+		},{
+			"date" : "2016-06-11",
+			"name" : "김수동",
+			"id"   : "002",
+			"flag" : false
+		},{
+			"date" : "2016-06-12",
+			"name" : "이민석",
+			"id"   : "003",
+			"flag" : false 
+		}];
+		
+		$scope.members = data;
+		$scope.submit = function(member){
+			console.log(member.name + "님 요청을 처리 했습니다.");
+		}
+		
+	});
+	
 </script>
 </html>
