@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!-- <script -->
+<!-- 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script> -->
+<!-- </head> -->
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		<p>현재시간은 : {{time}}</p>
+		<p>전역 :: {{global}}</p>
+	</div>
+	<input type="text" ng-model="name"/>
+	<p>Hello {{name}}</p>
+	<p>2-Way</p>
+	<input type="text" ng-model="name"/>
+	<p>1-Way</p>
+	<input type="text" value="{{name}}"/>
+	<hr/>
+	<p>Invoice</p>
+	<div ng-controller="invoiceController as invoice">
+		<input type="text" ng-model="invoice.qty"/>
+		<input type="text" ng-model="invoice.cost"/>
+		<button ng-click="invoice.pay()" >PAY</button>
+		<p>버튼 눌러야 되는 total : {{invoice.total}}</p>
+		<p>실시간 total : {{invoice.qty * invoice.cost}}</p>
+	</div>
+</body>
+<script>
+	var app = angular.module("myApp", []);
+
+	app.controller("myCtrl", function($scope, $interval) { //$scope와 $interval이 필요하다는 걸 명시 해줘야 함
+		
+		var getTime = function() {
+			$scope.time = new Date();
+		};
+		
+		$interval(getTime, 1000);
+	});
+	
+	app.run(function($rootScope){ //run은 모듈이 실행될때 추가적인 작업을 해주고자 사용한다.
+		$rootScope.global = "전역 스코프 입니다.";
+	});
+	
+	app.controller("invoiceController",function($scope){
+		var invoice = this;
+		
+		invoice.qty = 1;
+		invoice.cost = 2.5;
+		invoice.total = 0;
+		invoice.pay = function(){
+			console.log(invoice.qty * invoice.cost + "를 지불 해야 합니다.");
+			invoice.total = invoice.qty * invoice.cost;
+		}
+		
+	});
+</script>
+</html>
