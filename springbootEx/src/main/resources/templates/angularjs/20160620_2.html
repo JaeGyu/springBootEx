@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8"/>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="HelloController">
+	<p>COUNT: <input type="text" ng-model="product.cnt"/></p> <!-- 사용자가 model을 건들여야 하는 부분에서 ngModel을 사용한다. -->
+	<p>PRICE: <input type="text" ng-model="product.price"/></p>
+	<p>TOTAL: <input type="text" value="{{product.cnt * product.price}}"/></p>
+</div>
+
+<script>
+	var app = angular.module("myApp",[]);
+	
+	app.controller("HelloController",function($scope){
+		var product = {
+				cnt : 10,
+				price : 25
+		};
+		
+		$scope.product = product;
+	});
+</script>
+</body>
+</html>

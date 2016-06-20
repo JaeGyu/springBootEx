@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8"/>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+{{1+1}}<br/>
+%1+1%
+
+<div ng-controller="test1">
+{{greeting}}<br/>
+%greeting%
+</div>
+
+<div ng-controller="test2">
+{{greeting}}<br/>
+%greeting%<br/>
+<h1>{{getCount()}}</h1>
+<h1>%getCount()%</h1>
+<h1>{{getCount() > 3}}</h1>
+<h1>%getCount() > 3%</h1>
+</div>
+
+<div ng-controller="ExpressCtrl">
+	<h3>{{title|uppercase}}</h3>
+	<h3>{{title|lowercase}}</h3>
+	<h3>{{date|date:'short'}}</h3>
+	<h3>{{price|currency}}</h3>
+	<h3>{{price % 3 == 0}}</h3>
+</div>
+
+<script>
+	var app = angular.module("myApp",[]);
+	
+	/*
+		표현식의 {{}}를 %%로 변경한다.
+	*/
+	app.config(function($interpolateProvider){
+		$interpolateProvider.startSymbol("{{");
+		$interpolateProvider.endSymbol("}}");
+	});
+	
+	app.controller("test1",function($scope){
+		$scope.greeting = "test1의 인사입니다";
+	});
+	
+	app.controller("test2",function($scope){
+		$scope.greeting = "test2의 인사입니다.";
+		$scope.getCount = function(){
+			return 4;
+		}
+	});
+	
+	app.controller("ExpressCtrl",function($scope){
+		$scope.title = "The price:";
+		$scope.price = 129;
+		$scope.date = new Date();
+	});
+	
+</script>
+</body>
+</html>
