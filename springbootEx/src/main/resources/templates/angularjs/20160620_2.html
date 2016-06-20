@@ -4,6 +4,8 @@
 <meta charset="utf-8"/>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"></script>
 </head>
 <body>
 
@@ -13,8 +15,20 @@
 	<p>TOTAL: <input type="text" value="{{product.cnt * product.price}}"/></p>
 </div>
 
+<div ng-controller="Hello2Controller">
+	<p>Hello {{name}}</p>
+	<p>Hello <h2 ng-bind='name'></h2></p> 
+</div>
+
+<div ng-controller="Hello3Controller">
+	<p>{{name}}</p>
+</div>
+
+<div ng-controller="Hello4Controller">
+	<p ng-bind-html='name'></p>
+</div>
 <script>
-	var app = angular.module("myApp",[]);
+	var app = angular.module("myApp",['ngSanitize']);
 	
 	app.controller("HelloController",function($scope){
 		var product = {
@@ -24,6 +38,20 @@
 		
 		$scope.product = product;
 	});
+	
+	app.controller("Hello2Controller",function($scope){
+		$scope.name = "World!";
+	});
+	
+	app.controller("Hello3Controller",function($scope){
+		$scope.name = "<h1>Hello World!</h1>";
+	});
+	
+	app.controller("Hello4Controller",function($scope){
+		$scope.name = "<h1>Hello World!</h1>";
+	});
+	
+	
 </script>
 </body>
 </html>
