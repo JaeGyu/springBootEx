@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-init="grade='D'; targetGrade='A'">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">Select Your Grade!</div>
+		<div class="panel-body">
+			Check Your Grade: <select ng-model="grade">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+			</select>
+			<p>{{grade}}</p>
+			<div ng-switch on="grade">
+				<p ng-switch-when="A">Good Job!!!</p>
+				<p ng-switch-when="B">Good</p>
+				<p ng-switch-when="C">So So...</p>
+				<p ng-switch-when="D">Well...</p>
+				<p ng-switch-default>Nothing to say...</p>
+			</div>
+		</div>
+		<div>ng-if</div>
+		<div>
+			Click me: <input type="checkbox" ng-model="result" />
+			<div ng-if="result">Result is true!</div>
+			<div ng-if="!result">Result is false!</div>
+		</div>
+	</div>
+	<div ng-controller="gcontroller">
+		Check Your Grade: <select ng-model="targetGrade">
+			<option ng-repeat="grade in grades">{{grade}}</option>
+		</select>
+		<p>{{targetGrade}}</p>
+		<div ng-switch on="targetGrade">
+			<p ng-switch-when="A">Good Job!!!</p>
+			<p ng-switch-when="B">Good</p>
+			<p ng-switch-when="C">So So...</p>
+			<p ng-switch-when="D">Well...</p>
+			<p ng-switch-default>Nothing to say...</p>
+		</div>
+	</div>
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller("gcontroller", function($scope) {
+			$scope.grades = [ 'A', 'B', 'C', 'D' ];
+		});
+	</script>
+</body>
+</html>

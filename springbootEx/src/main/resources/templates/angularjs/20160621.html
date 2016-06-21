@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8"/>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+Click me:  <input type="checkbox" ng-model="result"/>
+<div ng-show="result">Result is true!</div>
+<div ng-hide="result">Result is false!</div>
+<script>
+	var app = angular.module("myApp",[]);
+</script>
+</body>
+</html>
