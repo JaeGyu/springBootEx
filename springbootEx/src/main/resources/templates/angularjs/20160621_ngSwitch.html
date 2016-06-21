@@ -4,6 +4,13 @@
 <meta charset="utf-8" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" 
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"/>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" 
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}"/>
 </head>
 <body>
 	<div class="panel panel-primary">
@@ -44,10 +51,41 @@
 			<p ng-switch-default>Nothing to say...</p>
 		</div>
 	</div>
+	
+	<table class="table">
+		<tr ng-repeat="(key,value) in {'subject':'Korean', 'grade':'A'}">
+			<td>{{key}}</td>
+			<td>{{value}}</td>
+		</tr>
+	</table>
+	
+	<table class="table" ng-controller="gcontroller2">
+		<tr ng-repeat="grade in grades" class="{{$even?'active':'warning'}}">
+			<td>{{grade.subject}}<span ng-if="$first">+</span></td> <!-- 첫번째 row이면 +를 붙인다. -->
+			<td>{{grade.grade}}</td>
+		</tr>
+	</table>
+	
 	<script>
 		var app = angular.module("myApp", []);
 		app.controller("gcontroller", function($scope) {
 			$scope.grades = [ 'A', 'B', 'C', 'D' ];
+		});
+		
+		app.controller("gcontroller2",function($scope){
+			$scope.grades = [{
+				"subject" : "Korean",
+				"grade" : "A"
+			},{
+				"subject" : "Math",
+				"grade" : "B"
+			},{
+				"subject" : "English",
+				"grade" : "A"
+			},{
+				"subject" : "Music",
+				"grade" : "D"
+			}];
 		});
 	</script>
 </body>
