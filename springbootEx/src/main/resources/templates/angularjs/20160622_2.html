@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+	<div ng-controller = "ListCtrl" class="panel panel-primary">
+		<div class="panel-heading">회원 목록</div>
+		<div class="panel-body">
+			페이지 번호 <input type="text" ng-model="page"/>
+			<table class="table">
+			<tr>
+				<th ng-click="criteria='id'">아이디</th>
+				<th ng-click="criteria='name'">이름</th>
+				<th ng-click="criteria='tel'">전화번호</th>
+			</tr>
+			<tr ng-repeat="member in members|paging:page">
+				<td>{{member.id}}</td>
+				<td>{{member.name}}</td>
+				<td>{{member.tel}}</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+	<script>
+		var app = angular.module("myApp", []);
+		app.filter("paging", function() {
+			return function(array, page) {
+				var pageNum = page ? (page - 1) * 10 : 0;
+				return array.slice(pageNum, pageNum + 10);
+			}
+		});
+		
+		app.controller("ListCtrl",function($scope){
+			$scope.members = [];
+			for(var i=0;i<1200000;i++){
+				$scope.members.push({"id":"user"+(i+1),
+					"name":"사용자"+(i+1), "tel":"123-00"+i});
+			}
+		});
+	</script>
+</body>
+</html>

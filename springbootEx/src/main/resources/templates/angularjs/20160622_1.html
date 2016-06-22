@@ -13,12 +13,15 @@
 	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
 </head>
 <body>
-
 	<div ng-controller="GradeController">
 		<button onclick="testDOM()">DOM Event BUTTON</button><br/>
 		<button ng-click="testAngular($event)">Angular BUTTON</button>
+		<p>{{regDate | date:'yyyy-MM-dd'}}</p>
+		<p>{{regDate | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+		<p>{{regDate | date:'medium'}}</p>
+		<p>{{regDate | date:'short'}}</p>
+		<p>{{money | currency}}</p>
 	</div>
-
 	<script>
 		function testDOM() {
 			console.log("DOM :::::::::::::::::::");
@@ -33,6 +36,9 @@
 				console.log($event);
 				console.log(event);
 			}
+			
+			$scope.regDate = 1288323623006;
+			$scope.money = 1002323;
 		})
 	</script>
 </body>
