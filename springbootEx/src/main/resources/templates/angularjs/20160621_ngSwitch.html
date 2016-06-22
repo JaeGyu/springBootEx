@@ -63,8 +63,21 @@
 		<tr ng-repeat="grade in grades" class="{{$even?'active':'warning'}}">
 			<td>{{grade.subject}}<span ng-if="$first">+</span></td> <!-- 첫번째 row이면 +를 붙인다. -->
 			<td>{{grade.grade}}</td>
+			<td ng-click="showGrade(grade)"><p ng-if="grade.isShow" class="badge">{{grade.grade}}</p></td>
 		</tr>
 	</table>
+	
+	<div class="panel panel-primary" ng-controller="gcontroller3">
+		<div class="panel-body">
+			<div>
+				<p ng-repeat-start="grade in grades">
+				-----------------------------{{grade.subject}} Start--------------------</p>
+				<h2>{{grade.subject}} {{grade.grade}}</h2> <!-- 반복되는 본문 -->
+				<p ng-repeat-end>
+				-----------------------------{{grade.subject}} End--------------------</p>
+			</div>
+		</div>
+	</div>
 	
 	<script>
 		var app = angular.module("myApp", []);
@@ -86,7 +99,29 @@
 				"subject" : "Music",
 				"grade" : "D"
 			}];
+			
+			$scope.showGrade = function(grade){
+				console.dir(grade);
+				grade.isShow = grade.isShow?!grade.isShow:true;
+			}
 		});
+		
+		app.controller("gcontroller3",function($scope){
+			$scope.grades = [{
+				"subject" : "Korean",
+				"grade" : "A"
+			},{
+				"subject" : "Math",
+				"grade" : "B"
+			},{
+				"subject" : "English",
+				"grade" : "A"
+			},{
+				"subject" : "Music",
+				"grade" : "D"
+			}];
+		});
+		
 	</script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body>
+
+	<div ng-controller="GradeController">
+		<button onclick="testDOM()">DOM Event BUTTON</button><br/>
+		<button ng-click="testAngular($event)">Angular BUTTON</button>
+	</div>
+
+	<script>
+		function testDOM() {
+			console.log("DOM :::::::::::::::::::");
+			console.log(event);
+		}
+
+		var app = angular.module("myApp", []);
+
+		app.controller("GradeController", function($scope) {
+			$scope.testAngular = function($event) {
+				console.log("AngularJS:::::::::::::");
+				console.log($event);
+				console.log(event);
+			}
+		})
+	</script>
+</body>
+</html>

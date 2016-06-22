@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+<style>
+.padding5 {
+	padding: 15px;
+	border: 1px dooted blue;
+}
+
+.boldText {
+	font-weight: bold;
+}
+
+.redFill {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<p ng-class="{padding5:padding, boldText:bold, redFill:red}" ng-click="console.log('gg')">Map
+		Syntax Example</p>
+	<input type="checkbox" ng-model="padding" /> Padding<br>
+	<input type="checkbox" ng-model="bold" /> Bold<br>
+	<input type="checkbox" ng-model="red" /> Red<br>
+</body>
+</html>
