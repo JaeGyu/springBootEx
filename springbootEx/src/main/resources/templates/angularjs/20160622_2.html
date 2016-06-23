@@ -31,6 +31,14 @@
 			</table>
 		</div>
 	</div>
+	<br>
+	<div ng-controller="testCtrl as tc">
+		<p><h1>{{tc.name}}</h1></p>
+	</div>
+	
+	<div ng-controller="testCtrl2">
+		<p><h1>{{name}}</h1></p>
+	</div>
 	<script>
 		var app = angular.module("myApp", []);
 		app.filter("paging", function() {
@@ -42,10 +50,23 @@
 		
 		app.controller("ListCtrl",function($scope){
 			$scope.members = [];
-			for(var i=0;i<1200000;i++){
+			for(var i=0;i<121;i++){
 				$scope.members.push({"id":"user"+(i+1),
 					"name":"사용자"+(i+1), "tel":"123-00"+i});
 			}
+		});
+		
+		app.controller("testCtrl",function($scope){
+			var t = this;
+			t.name = "jjj";
+			
+			console.log("$scope", $scope);
+		});
+		
+		app.controller("testCtrl2",function($scope){
+			$scope.name = "jjj";
+			
+			console.log("$scope", $scope);
 		});
 	</script>
 </body>
