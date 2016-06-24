@@ -17,21 +17,19 @@
 	<div ng-controller="calcController">
 		<input type="text" ng-model="num"/>
 		<br>
-		<p><h1>{{sum2(num)}}</h1></p>
+		<p><h1>{{sum2()}}</h1></p>
 	</div>
 	
 	<script>
 		var app = angular.module("myApp", []);
 		app.controller("calcController", function($scope,HelloFactory,HelloService3) {
-			console.log("컨트롤러!");
 			$scope.num = 10;
-			$scope.sum = function(num){
-				HelloFactory.add(Number(num));
+			$scope.sum = function(){
+				HelloFactory.add(Number($scope.num));
 				return HelloFactory.getSum();
 			},
-			$scope.sum2 = function(num){
-				HelloService3.add(num);
-				return HelloService3.getSum();
+			$scope.sum2 = function(){
+				return HelloService3.addAndGetSum(Number($scope.num));
 			}
 		});
 		
@@ -71,6 +69,11 @@
 			this.getSum = function(){
 				return sum;
 			};
+			this.addAndGetSum = function(num){
+				console.log("Here~~");
+				sum += num;
+				return sum;
+			}
 		});
 		
 	</script>
