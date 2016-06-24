@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body ng-app="myApp">
+<div class="container">
+	<div class="col-sm-12">
+		<form class="form-horizontal">
+			<div class="con-sm-10" ng-controller="calcController">
+				<input type="text" class="form-control" ng-model="num1">
+				<br>
+				<input type="text" class="form-control" ng-model="num2">
+				<br>
+				<p><h1>calc.cal(num1,num2) : {{calc.cal(num1,num2)}}</h1></p>
+				<p><h1>calSum() : {{calSum()}}</h1></p>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	var app = angular.module("myApp",[]);
+	
+	/*
+		메서드를 만든다음 서비스객체에 위임을 한다.
+	*/
+	app.controller("calcController", function($scope, sum) {
+		$scope.num1 = 0;
+		$scope.num2 = 0;
+		$scope.calc = sum;
+		$scope.calSum = function(){
+			return sum.cal($scope.num1,$scope.num2);
+		};
+	});
+	
+	app.factory("sum", function() {
+		return {
+			cal : function(num1, num2) {
+				return Number(num1) + Number(num2);
+			}
+		};
+	});
+</script>
+</body>
+</html>
