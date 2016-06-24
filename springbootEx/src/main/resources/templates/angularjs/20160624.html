@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body ng-app="myApp">
+	
+	<div ng-controller="calcController">
+		<input type="text" ng-model="num"/>
+		<br>
+		<p><h1>{{sum2(num)}}</h1></p>
+	</div>
+	
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller("calcController", function($scope,HelloFactory,HelloService3) {
+			console.log("컨트롤러!");
+			$scope.num = 10;
+			$scope.sum = function(num){
+				HelloFactory.add(Number(num));
+				return HelloFactory.getSum();
+			},
+			$scope.sum2 = function(num){
+				HelloService3.add(num);
+				return HelloService3.getSum();
+			}
+		});
+		
+		app.factory("HelloFactory",function(){
+			return {
+				sum:0,
+				add:function(num){
+					this.sum += Number(num);
+				},
+				getSum : function(){
+					return this.sum;
+				}
+			};
+		});
+		
+		/*
+		작성하려는 서비스 객체가 AngularJS에 등록된 다른 객체나 서비스를 이용하고자 한다면
+		아래와 같이 한다. 
+		*/
+		app.factory("HelloFactory2",['$http',function($http){
+			return {
+				sum:0,
+				add:function(num){
+					this.sum += num;
+				},
+				getSum : function(){
+					return this.sum;
+				}
+			};
+		}]);
+		
+		app.service("HelloService3",function(){
+			var sum = 0;
+			this.add = function(num){
+				sum += num;
+			};
+			this.getSum = function(){
+				return sum;
+			};
+		});
+		
+	</script>
+</body>
+</html>
