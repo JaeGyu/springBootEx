@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 <meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
 </head>
 <body>
-<h1>Angular  백엔드 테스트</h1>
+	<h1>Angular 백엔드 테스트</h1>
+	
+	<div ng-controller="cpuStatesController">
+	<p>cpu states: {{user | number:1}}% user, {{nice | number:1}}% nice, {{system | number:1}}% system, {{idle | number:1}}% idle, {{iowait | number:1}}% iowait</p>
+	</div>
+
+<script>
+
+	var app = angular.module("myApp",[]);
+	app.controller("cpuStatesController",function($scope){
+		$scope.user = 1.8;
+		$scope.nice = 0.0;
+		$scope.system = 1.9;
+		$scope.idle = 93.4;
+		$scope.iowait = 2.9;
+	});
+</script>
 </body>
 </html>
