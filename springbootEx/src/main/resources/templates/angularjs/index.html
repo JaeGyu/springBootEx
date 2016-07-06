@@ -22,12 +22,23 @@
 <script>
 
 	var app = angular.module("myApp",[]);
-	app.controller("cpuStatesController",function($scope){
-		$scope.user = 1.8;
-		$scope.nice = 0.0;
-		$scope.system = 1.9;
-		$scope.idle = 93.4;
-		$scope.iowait = 2.9;
+	app.controller("cpuStatesController",function($scope,$http,$interval){
+		
+		$interval(function(){
+			$http({
+				  method: 'GET',
+				  url: '/cpu/states'
+				}).then(function successCallback(response) {
+					console.log(response.data);
+					$scope.user = response.data.user;
+					$scope.nice = response.data.nice;
+					$scope.system = response.data.system;
+					$scope.idle = response.data.idle;
+					$scope.iowait = response.data.iowait;
+				}, function errorCallback(response) {
+					console.log(response);
+			});
+		},2000);
 	});
 </script>
 </body>
