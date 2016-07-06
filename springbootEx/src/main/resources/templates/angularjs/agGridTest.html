@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/4.2.7/ag-grid.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body ng-app="myApp" ng-controller="exampleCtrl">
+
+<div ag-grid="gridOptions" class="ag-fresh" style="height: 100%;"></div>
+
+<script>
+	agGrid.initialiseAgGridWithAngular1(angular);
+	var app = angular.module("myApp", ["agGrid"]);
+	
+	app.controller("exampleCtrl", function($scope) {
+
+	    var columnDefs = [
+	        {headerName: "Make", field: "make"},
+	        {headerName: "Model", field: "model"},
+	        {headerName: "Price", field: "price"}
+	    ];
+
+	    var rowData = [
+	        {make: "Toyota", model: "Celica", price: 35000},
+	        {make: "Ford", model: "Mondeo", price: 32000},
+	        {make: "Porsche", model: "Boxter", price: 72000}
+	    ];
+
+	    $scope.gridOptions = {
+	        columnDefs: columnDefs,
+	        rowData: rowData
+	    };
+
+	});
+	
+</script>
+</body>
+</html>
