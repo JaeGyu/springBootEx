@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/4.2.7/ag-grid.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"
+	th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css}" />
+</head>
+<body ng-app="myApp" ng-controller="exampleCtrl">
+
+<div ag-grid="gridOptions" class="ag-fresh" style="height: 100%;"></div>
+
+<script>
+	agGrid.initialiseAgGridWithAngular1(angular);
+	var app = angular.module("myApp", ["agGrid"]);
+	
+	app.controller("exampleCtrl", function($scope) {
+
+		var columnDefs = [
+		    {headerName: "Group", cellRenderer: 'group'},
+		    {headerName: "Athlete", field: "athlete"},
+		    {headerName: "Year", field: "year"},
+		    {headerName: "Country", field: "country"}
+		];
+
+		var rowData = [
+		    {group: 'Group A',
+		        participants: [
+		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'},
+		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'},
+		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'}
+		        ]},
+		    {group: 'Group B', athlete: 'Sausage', year: 'Spaceman', country: 'Winklepicker',
+		        participants: [
+		        {athlete: 'Natalie Coughlin', year: '2008', country: 'United States'},
+		        {athlete: 'Missy Franklin ', year: '2012', country: 'United States'},
+		        {athlete: 'Ole Einar Qjorndalen', year: '2002', country: 'Norway'},
+		        {athlete: 'Marit Bjorgen', year: '2010', country: 'Norway'},
+		        {athlete: 'Ian Thorpe', year: '2000', country: 'Australia'}
+		        ]},
+		    {group: 'Group C',
+		        participants: [
+		        {athlete: 'Janica Kostelic', year: '2002', country: 'Crotia'},
+		        {athlete: 'An Hyeon-Su', year: '2006', country: 'South Korea'}
+		        ]}
+		    ];
+
+		$scope.gridOptions = {
+			    columnDefs: columnDefs,
+			    rowData: rowData,
+			    debug: true,
+			    getNodeChildDetails: getNodeChildDetails,
+			    onGridReady: function(params) {
+			        params.api.sizeColumnsToFit();
+			    }
+	     };
+		
+		function getNodeChildDetails(rowItem) {
+		    if (rowItem.group) {
+		        return {
+		            group: true,
+		            // open C be default
+		            expanded: rowItem.group === 'Group C',
+		            // provide ag-Grid with the children of this group
+		            children: rowItem.participants,
+		            // this is not used, however it is available to the cellRenderers,
+		            // if you provide a custom cellRenderer, you might use it. it's more
+		            // relavent if you are doing multi levels of groupings, not just one
+		            // as in this example.
+		            field: 'group',
+		            // the key is used by the default group cellRenderer
+		            key: rowItem.group
+		        };
+		    } else {
+		        return null;
+		    }
+		}
+
+	});
+	
+</script>
+</body>
+</html>
