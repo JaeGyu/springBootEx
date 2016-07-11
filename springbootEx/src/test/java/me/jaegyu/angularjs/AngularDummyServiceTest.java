@@ -7,6 +7,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 public class AngularDummyServiceTest {
 
 	@Test
@@ -17,4 +19,13 @@ public class AngularDummyServiceTest {
 		
 		for(int i=0;i<100;i++) System.out.println(df.format(r.nextFloat()*100));
 	}
+	
+	@Test
+	public void testRandomNumberCreate2() throws Exception{
+		
+		Random r = new Random();
+		
+		System.out.println(r.nextInt(2)+1);
+	}
+	
 }

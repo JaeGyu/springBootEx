@@ -11,5 +11,10 @@ public class WebController {
 	public String index() {
 		return "angularjs/index";
 	}
+	
+	@RequestMapping(value="/random/json",method = RequestMethod.GET)
+	public String randomJson(){
+		return "angularjs/agGridRandomJson";
+	}
 
 }
