@@ -18,6 +18,7 @@
 
 <div class="container">
 	<div ag-grid="gridOptions" class="ag-blue" style="height: 100%;"></div>
+	<button ng-click='setData()'>click!</button>
 </div>
 
 <script>
@@ -35,12 +36,14 @@
 
 		var rowData = [
 		    {group: 'Group A',
+		     open: true,
 		        participants: [
 		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'},
 		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'},
 		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'}
 		        ]},
 		    {group: 'Group B', athlete: 'Sausage', year: 'Spaceman', country: 'Winklepicker',
+		       open: false,
 		        participants: [
 		        {athlete: 'Natalie Coughlin', year: '2008', country: 'United States'},
 		        {athlete: 'Missy Franklin ', year: '2012', country: 'United States'},
@@ -49,6 +52,7 @@
 		        {athlete: 'Ian Thorpe', year: '2000', country: 'Australia'}
 		        ]},
 		    {group: 'Group C',
+		       open: true,
 		        participants: [
 		        {athlete: 'Janica Kostelic', year: '2002', country: 'Crotia'},
 		        {athlete: 'An Hyeon-Su', year: '2006', country: 'South Korea'}
@@ -66,12 +70,20 @@
 			    }
 	     };
 		
+		$scope.setData = function(){
+			
+			rowData[0].participants[0].year = '2016';
+			
+			$scope.gridOptions.api.setRowData(rowData);
+		};
+		
 		function getNodeChildDetails(rowItem) {
 		    if (rowItem.group) {
 		        return {
 		            group: true,
 		            // open C be default
-		            expanded: rowItem.group === 'Group C',
+// 		            expanded: rowItem.group === 'Group A',
+		            expanded: rowItem.open,
 		            // provide ag-Grid with the children of this group
 		            children: rowItem.participants,
 		            // this is not used, however it is available to the cellRenderers,
