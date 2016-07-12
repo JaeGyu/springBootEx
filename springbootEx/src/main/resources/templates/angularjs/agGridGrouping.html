@@ -19,6 +19,7 @@
 <div class="container">
 	<div ag-grid="gridOptions" class="ag-blue" style="height: 100%;"></div>
 	<button ng-click='setData()'>click!</button>
+	<button ng-click='printData()'>click!</button>
 </div>
 
 <script>
@@ -57,7 +58,7 @@
 		        {athlete: 'Janica Kostelic', year: '2002', country: 'Crotia'},
 		        {athlete: 'An Hyeon-Su', year: '2006', country: 'South Korea'}
 		        ]}
-		    ];
+		 ];
 
 		$scope.gridOptions = {
 			    columnDefs: columnDefs,
@@ -67,14 +68,22 @@
 			    getNodeChildDetails: getNodeChildDetails,
 			    onGridReady: function(params) {
 			        params.api.sizeColumnsToFit();
+			        params.api.addEventListener('rowGroupOpened', function(event) {
+			        	var data = event.node.data;
+			 			data.expanded = event.node.expanded;
+						console.log("group toggle!!");
+					});
 			    }
-	     };
+	    };
 		
 		$scope.setData = function(){
-			
-			rowData[0].participants[0].year = '2016';
-			
+			rowData[0].participants[0].year = '2016';			
 			$scope.gridOptions.api.setRowData(rowData);
+		};
+		
+		$scope.printData = function(){
+			console.log("rowData");
+			console.log(rowData);
 		};
 		
 		function getNodeChildDetails(rowItem) {
@@ -83,7 +92,7 @@
 		            group: true,
 		            // open C be default
 // 		            expanded: rowItem.group === 'Group A',
-		            expanded: rowItem.open,
+		            expanded: rowItem.expanded,
 		            // provide ag-Grid with the children of this group
 		            children: rowItem.participants,
 		            // this is not used, however it is available to the cellRenderers,
