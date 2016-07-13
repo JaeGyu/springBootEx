@@ -59,6 +59,28 @@
 		        {athlete: 'An Hyeon-Su', year: '2006', country: 'South Korea'}
 		        ]}
 		 ];
+		
+		var rowData2 = [
+		    {group: 'Group A',
+		        participants: [
+		        {athlete: 'Michael Phelps', year: '2017', country: 'United States'},
+		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'},
+		        {athlete: 'Michael Phelps', year: '2008', country: 'United States'}
+		        ]},
+		    {group: 'Group B', athlete: 'Sausage', year: 'Spaceman', country: 'Winklepicker',
+		        participants: [
+		        {athlete: 'Natalie Coughlin', year: '2008', country: 'United States'},
+		        {athlete: 'Missy Franklin ', year: '2012', country: 'United States'},
+		        {athlete: 'Ole Einar Qjorndalen', year: '2002', country: 'Norway'},
+		        {athlete: 'Marit Bjorgen', year: '2010', country: 'Norway'},
+		        {athlete: 'Ian Thorpe', year: '2000', country: 'Australia'}
+		        ]},
+		    {group: 'Group C',
+		        participants: [
+		        {athlete: 'Janica Kostelic', year: '2002', country: 'Crotia'},
+		        {athlete: 'An Hyeon-Su', year: '2006', country: 'South Korea'}
+		        ]}
+		 ];
 
 		$scope.gridOptions = {
 			    columnDefs: columnDefs,
@@ -77,8 +99,21 @@
 	    };
 		
 		$scope.setData = function(){
-			rowData[0].participants[0].year = '2016';			
+			
+			for(var i=0;i<rowData.length;i++){
+				rowData[i].participants = getParticipantNew(rowData[i]);
+			}
+			
 			$scope.gridOptions.api.setRowData(rowData);
+		};
+		
+		function getParticipantNew(r){
+			for(var i=0;i<rowData2.length;i++){
+				if(rowData2[i].group == r.group){
+					return rowData2[i].participants;
+				}
+			}
+			
 		};
 		
 		$scope.printData = function(){
@@ -90,17 +125,9 @@
 		    if (rowItem.group) {
 		        return {
 		            group: true,
-		            // open C be default
-// 		            expanded: rowItem.group === 'Group A',
 		            expanded: rowItem.expanded,
-		            // provide ag-Grid with the children of this group
 		            children: rowItem.participants,
-		            // this is not used, however it is available to the cellRenderers,
-		            // if you provide a custom cellRenderer, you might use it. it's more
-		            // relavent if you are doing multi levels of groupings, not just one
-		            // as in this example.
 		            field: 'group',
-		            // the key is used by the default group cellRenderer
 		            key: rowItem.group
 		        };
 		    } else {
