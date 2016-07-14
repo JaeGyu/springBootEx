@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script src="../../lib/tc_angular_chart/tc-angular-chartjs.min.js"></script>
+<style type="text/css">
+#chart {
+ height : 300px;
+ width  : 250px;
+}
+
+canvas{
+  display: inline-block;  
+}
+
+</style>
+</head>
+<body>
+<div id='chart' ng-controller="myController" >
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data" auto-legend></canvas>
+</div>
+<script>
+	var app = angular.module("myApp",["tc.chartjs"]);
+	
+	app.controller("myController",function($scope){
+		
+		// Chart.js Data
+	    $scope.data = {
+	      labels: ['mem', 'cpu', 'I/O'],
+	      datasets: [
+	        {
+	          label: 'datanode01',
+	          backgroundColor: "rgba(255,99,132,0.2)",
+	          borderColor: "rgba(255,99,132,1)",
+	          borderWidth: 1,
+	          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+	          hoverBorderColor: "rgba(255,99,132,1)",
+	          data: [65, 50, 76]
+	        }]
+	    };
+
+	    // Chart.js Options
+	    $scope.options =  {
+
+	      // Sets the chart to be responsive
+	      responsive: true,
+
+	      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+	      scaleBeginAtZero : true,
+
+	      //Boolean - Whether grid lines are shown across the chart
+	      scaleShowGridLines : true,
+
+	      //String - Colour of the grid lines
+	      scaleGridLineColor : "rgba(0,0,0,.05)",
+
+	      //Number - Width of the grid lines
+	      scaleGridLineWidth : 1,
+
+	      //Boolean - If there is a stroke on each bar
+	      barShowStroke : true,
+
+	      //Number - Pixel width of the bar stroke
+	      barStrokeWidth : 1,
+
+	      //Number - Spacing between each of the X value sets
+	      barValueSpacing : 5,
+
+	      //Number - Spacing between data sets within X values
+	      barDatasetSpacing : 1,
+
+	      //String - A legend template
+// 	      legendTemplate : '<ul class="tc-chart-js-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+	    };
+		
+		
+	});
+</script>
+</body>
+</html>
