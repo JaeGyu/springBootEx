@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<style type="text/css">
+.chart {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+<div ng-controller="chartController">
+	<button ng-click="print()">print</button><br/>
+	<div class="chart" ng-repeat="c in chartList" id="{{c}}" style="height: 150px; width: 250px;"></div>
+</div>
+
+<script>
+	var app = angular.module("myApp",[]);		
+	
+	app.directive('afterRender', ['$timeout', function ($timeout) {
+        var def = {
+            restrict: 'A',
+            terminal: true,
+            transclude: false,
+            link: function (scope, element, attrs) {
+                $timeout(scope.$eval(attrs.afterRender), 0);  //Calling a scoped method
+            }
+        };
+        return def;
+    }]);
+	
+	app.controller("chartController",function($scope){
+		
+		$scope.chartList = [];
+		
+		$scope.print = function(){
+			for(var i=0;i<100;i++){
+				new CanvasJS.Chart($scope.chartList[i],{
+					title:{
+						text: "datanode"              
+					},
+					data: [              
+					{
+						// Change type to "doughnut", "line", "splineArea", etc.
+						type: "column",
+						dataPoints: [
+							{ label: "cpu",  y: 100 },
+							{ label: "mem",  y: 15  },
+							{ label: "I/O",  y: 28  }
+						]
+					}
+					]
+				}).render();	
+			}						
+		};
+		
+		for(var i=0;i<100;i++){
+			var chartId = "chartContainer" + i;
+			$scope.chartList.push(chartId);
+		}
+		$scope.missionCompled = function(){
+		}
+	});
+	
+</script>
+</body>
+</html>

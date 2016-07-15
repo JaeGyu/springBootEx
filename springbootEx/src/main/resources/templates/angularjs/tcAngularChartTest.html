@@ -14,30 +14,54 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
 <script src="../../lib/tc_angular_chart/tc-angular-chartjs.min.js"></script>
 <style type="text/css">
-canvas{
-  display: inline-block;  
-/*   vertical-align: baseline; */
-   horizontal-align : baseline;
-  border: 2px solid red;
+
+/* canvas { display:inline-block; border: 1px solid black; } */
+
+ canvas{ 
+   display:inline-block;   
+/* /*    horizontal-align : baseline; */ 
+   border: 2px solid red; 
+ } 
+
+#chart {   
+   height : 300px;  
+   width  : 350px;  
 }
-#chart {
- height : 300px;
- width  : 250px;
-}
+ 
+span {
+width:100px;
+height:100px;
+}  
 </style>
 </head>
 <body>
 <div id='chart' ng-controller="myController" >
-	<canvas tc-chartjs-bar chart-options="options" chart-data="data" ></canvas>
-	<canvas tc-chartjs-bar chart-options="options" chart-data="data" ></canvas>
+	<span><canvas tc-chartjs-bar chart-options="options" chart-data="data1" ></canvas></span>
+	<canvas tc-chartjs-bar chart-options="options" chart-data="data2"></canvas>
 </div>
+<div ng-controller="repeatTestController">
+<!-- <span ng-repeat="r in rr">{{r}} | </span> -->
+
+</div>
+
 <script>
 	var app = angular.module("myApp",["tc.chartjs"]);
+	
+	app.controller("repeatTestController",function($scope){
+		
+		var arr = [];
+		
+		for(var i=0;i<1000;i++){
+			arr.push("aa" + i);
+		}
+		
+		$scope.rr = arr;
+	});
 	
 	app.controller("myController",function($scope){
 		
 		// Chart.js Data
-	    $scope.data = {
+	    $scope.data1 = {
 	      labels: ['mem', 'cpu', 'I/O'],
 	      datasets: [
 	        {
@@ -50,12 +74,30 @@ canvas{
 	          data: [65, 50, 76]
 	        }]
 	    };
+		
+	    $scope.data2 = {
+	  	      labels: ['mem', 'cpu', 'I/O'],
+	  	      datasets: [
+	  	        {
+	  	          label: 'datanode02',
+	  	          backgroundColor: "rgba(255,99,132,0.2)",
+	  	          borderColor: "rgba(255,99,132,1)",
+	  	          borderWidth: 1,
+	  	          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+	  	          hoverBorderColor: "rgba(255,99,132,1)",
+	  	          data: [35, 20, 56]
+	  	        }]
+	  	    };
 
 	    // Chart.js Options
 	    $scope.options =  {
+	    		
+	      animation : false,
 
 	      // Sets the chart to be responsive
 	      responsive: true,
+	      
+	      maintainAspectRatio: true,
 
 	      //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
 	      scaleBeginAtZero : true,
