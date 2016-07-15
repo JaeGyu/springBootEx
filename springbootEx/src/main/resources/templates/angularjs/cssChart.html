@@ -18,7 +18,7 @@
   	flex-direction: column;  
   	justify-content: center;  
   	align-items: center;
-  	border: 2px solid red;  
+/*   	border: 2px solid red;   */
   	font-family: "fira-sans-2", Verdana, sans-serif;  
   }  
 
@@ -29,7 +29,7 @@
   	width: 250px;  
   	height: 120px;  
 	margin: 1.1em 0 0;
-	border: 2px solid red; 
+/* 	border: 2px solid red;  */
 	padding: 0;
   	background: transparent;  
 	font-size: 11px;
@@ -202,31 +202,7 @@
 </head>
 <body>
 <div ng-controller="chartController">
-<div class="chart">
-	<table id="q-graph">
-<!-- 		<thead> -->
-<!-- 			<tr> -->
-<!-- 				<th></th> -->
-<!-- 				<th class="sent">datanode01</th> -->
-<!-- 			</tr> -->
-<!-- 		</thead> -->
-		<tbody>
-			<tr class="qtr" id="q1">
-				<th scope="row">CPU</th>
-				<td class="sent bar s1" style="height: 70px;"><p>70</p></td>
-			</tr>
-			<tr class="qtr" id="q2">
-				<th scope="row">MEM</th>
-				<td class="sent bar s2" style="height: 64px;"><p>64</p></td>
-			</tr>
-			<tr class="qtr" id="q3">
-				<th scope="row">I/O</th>
-				<td class="sent bar s3" style="height: 37px;"><p>37</p></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<div class="chart">
+<div class="chart" ng-repeat="n in chartArr">
 	<table id="q-graph">
 <!-- 		<thead> -->
 <!-- 			<tr> -->
@@ -255,6 +231,13 @@
 	var app = angular.module("myApp",[]);
 	
 	app.controller("chartController",function($scope){
+		
+		$scope.chartArr = [];
+		
+		for(var i=0;i<1000;i++){
+			$scope.chartArr.push(i);
+		}
+		
 		
 	});
 	
