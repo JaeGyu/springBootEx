@@ -4,10 +4,26 @@
 <meta charset="utf8" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style type="text/css">
  .chart { 
   	display: inline-block;  
  } 
+
+.chart_header {
+	text-align : center;
+	font-size: 11px;
+	font-family: "fira-sans-2", Verdana, sans-serif;
+	margin: 0 0 0 0;
+	padding: 0;
+	top: 0;
+	left: -10;
+}
 
  body, html { 
  	height: 100%; 
@@ -18,7 +34,7 @@
   	flex-direction: column;  
   	justify-content: center;  
   	align-items: center;
-/*    	border: 2px solid red;    */
+/*    	border: 2px solid red;     */
   	font-family: "fira-sans-2", Verdana, sans-serif;  
   }  
   
@@ -29,9 +45,9 @@
   	position: relative;  
   	width: 250px;  
   	height: 120px;  
-	margin: 1.1em 0 0;
+	margin: -1.1em 0 0;
 	left: 1em;
-/*  	border: 2px solid red;   */
+/*   	border: 2px solid blue;    */
 	padding: 0;
   	background: transparent;  
 	font-size: 11px;
@@ -140,31 +156,24 @@
 	opacity: .4;
 }
 
-
-/* #q-graph .sent { */
-/* 	left: 13px; */
-/* 	background-color: #39cccc; */
-/* 	border-color: transparent; */
-/* } */
-
 /*바 색깔 지정*/
 #q-graph .s1 {
 	left: 13px;
-	background-color: #39cccc;
+	background-color: #17375e;
 	border-color: transparent;
 }
 
 /*바 색깔 지정*/
 #q-graph .s2 {
 	left: 13px;
-	background-color: red;
+	background-color: #007bdb;
 	border-color: transparent;
 }
 
 /*바 색깔 지정*/
 #q-graph .s3 {
 	left: 13px;
-	background-color: green;
+	background-color: #7bb1ed;
 	border-color: transparent;
 }
 
@@ -207,26 +216,22 @@
 </head>
 <body>
 <div ng-controller="chartController">
-<div class="chart" ng-repeat="n in chartArr">
+<div class="chart" ng-repeat="n in chartArr" ng-click="getDetail(n)">
+	<p class="chart_header">{{n.nodename}}</p>
 	<table id="q-graph">
-<!-- 		<thead> -->
-<!-- 			<tr> -->
-<!-- 				<th></th> -->
-<!-- 				<th class="sent">datanode01</th> -->
-<!-- 			</tr> -->
-<!-- 		</thead> -->
+		</thead>
 		<tbody>
 			<tr class="qtr" id="q1">
 				<th scope="row">CPU</th>
-				<td class="sent bar s1" style="height: {{n.cpu}}px;"><p>70</p></td>
+				<td class="sent bar s1" style="height: {{n.cpu}}px;"><p>{{n.cpu}}</p></td>
 			</tr>
 			<tr class="qtr" id="q2">
 				<th scope="row">MEM</th>
-				<td class="sent bar s2" style="height: {{n.mem}}px;"><p>64</p></td>
+				<td class="sent bar s2" style="height: {{n.mem}}px;"><p>{{n.mem}}</p></td>
 			</tr>
 			<tr class="qtr" id="q3">
 				<th scope="row">I/O</th>
-				<td class="sent bar s3" style="height: {{n.io}}px;"><p>37</p></td>
+				<td class="sent bar s3" style="height: {{n.io}}px;"><p>{{n.io}}</p></td>
 			</tr>
 		</tbody>
 	</table>
@@ -243,11 +248,43 @@
 		</div>
 	</div>
 </div>
+
+<!-- 모달 창 -->
+<div class="modal fade" id="layerpop" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- header -->
+      <div class="modal-header">
+        <!-- 닫기(x) 버튼 -->
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <!-- header title -->
+        <h4 class="modal-title">Header</h4>
+      </div>
+      <!-- body -->
+      <div class="modal-body">
+            <p>cpu {{currentData.cpu}}</p>
+            <p>mem {{currentData.mem}}</p>
+            <p>i/o {{currentData.io}}</p>
+            
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        Footer
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalClose()">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 <script>
 	var app = angular.module("myApp",[]);
 	
 	app.controller("chartController",function($scope,$interval){
+		
+		$scope.currentDataNodeName = '';
+		
+		$scope.currentData = {};
 		
 		$interval(function(){
 			$scope.chartArr = [];
@@ -259,13 +296,41 @@
 				var io = Math.floor(Math.random() * 100) + 1;
 				
 				var temp = {};
-				
+				temp.nodename = "datanode" + i;
 				temp.cpu = cpu;
 				temp.mem = mem;
 				temp.io = io;
 				
 				$scope.chartArr.push(temp);
-			}},5000);
+			}
+			
+			if($scope.currentDataNodeName != ''){
+				console.log("탄다");
+				setCurrentData();
+			}else{
+				console.log("안탄다");
+			}
+			
+		},5000);
+		
+		$scope.modalClose = function(){
+			$scope.currentDataNodeName = '';
+			$scope.currentData = {};
+		}
+		
+		$scope.getDetail = function(n){
+			$scope.currentDataNodeName = n.nodename;
+			$('div.modal').modal();
+		};
+		
+		function setCurrentData(){
+			for(var i=0; i<$scope.chartArr.length;i++){
+				if($scope.chartArr[i].nodename == $scope.currentDataNodeName){
+					$scope.currentData = $scope.chartArr[i];
+				}
+			}
+		};
+		
 	});
 	
 </script>
