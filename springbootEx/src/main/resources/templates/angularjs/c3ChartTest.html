@@ -10,6 +10,66 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 </head>
-<body></body>
+<body>
+<div ng-controller="chartController">
+	<div id="chart"></div>
+	<button ng-click="setData()">click</button>
+</div>
+<script>
+	var app = angular.module("myApp",[]);
+	
+	app.controller("chartController",function($scope){
+		
+		$scope.data = ["data"];
+		
+// 		for(var i=0;i<100;i++){
+// 			var num = Math.floor(Math.random() * 100) + 1;
+// 			$scope.data.push(num);
+// 		}
+		
+		var chart = c3.generate({
+		    bindto: '#chart',
+		    data: {
+		      columns: [
+		        $scope.data
+		      ]		      
+		    },
+		    axis: {
+		        y: {
+		            max: 90,
+		            min: 0,
+		            // Range includes padding, set 0 if no padding needed
+		            // padding: {top:0, bottom:0}
+		        }
+		    }
+		});
+		
+		$scope.setData = function(){
+			console.log("dd");
+			
+			var num = Math.floor(Math.random() * 100) + 1;
+			
+			if($scope.data.length < 10){
+				$scope.data.push(num);
+			}else{
+				$scope.data.splice(1,1);
+				$scope.data.push(num);	
+			}
+			
+			chart.load({
+				columns:[
+				  $scope.data
+				]
+			});
+		}
+	});
+</script>
+</body>
 </html>
