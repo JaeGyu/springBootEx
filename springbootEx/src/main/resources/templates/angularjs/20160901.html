@@ -13,17 +13,21 @@ ngClass 연습
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
 <style type="text/css">
 
+.main{
+	color : red;
+}
+
 </style>
 </head>
 <body ng-controller="Controller">
-	
+
 	<ul>
-		<li ng-repeat="temp in sample" ng-click="displayConsole($index)">
-			{{temp.name}} | {{temp.age}}
-		</li>
+		<li ng-repeat="temp in sample" ng-click="displayConsole($index)"
+			ng-class="{main: temp.name === 'bob'}">{{temp.name}} |
+			{{temp.age}}</li>
 	</ul>
-	
-<script>
+
+	<script>
 	var app = angular.module("myApp",[]);
 	
 	app.controller("Controller",function($scope){
