@@ -1,0 +1,45 @@
+<!-- 
+ngClass 연습
+ -->
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
+<style type="text/css">
+
+</style>
+</head>
+<body ng-controller="Controller">
+	
+	<ul>
+		<li ng-repeat="temp in sample" ng-click="displayConsole($index)">
+			{{temp.name}} | {{temp.age}}
+		</li>
+	</ul>
+	
+<script>
+	var app = angular.module("myApp",[]);
+	
+	app.controller("Controller",function($scope){
+		
+		var temp = [];
+		temp.push({"name":"alice","age":12});
+		temp.push({"name":"bob","age":32});
+		temp.push({"name":"sujan","age":22});
+		
+		$scope.sample = temp;
+		
+		$scope.displayConsole = function(index){
+			console.log(temp[index]);
+		};
+			
+	});
+</script>
+</body>
+</html>
