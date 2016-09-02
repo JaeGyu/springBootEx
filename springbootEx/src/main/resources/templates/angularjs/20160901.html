@@ -22,7 +22,7 @@ ngClass 연습
 <body ng-controller="Controller">
 
 	<ul>
-		<li ng-repeat="temp in sample" ng-click="displayConsole($index)"
+		<li ng-repeat="temp in sample" ng-mouseover="runMouseOver($index)" ng-click="displayConsole($index)"
 			ng-class="{main: temp.name === 'bob'}">{{temp.name}} |
 			{{temp.age}}</li>
 	</ul>
@@ -40,6 +40,10 @@ ngClass 연습
 		$scope.sample = temp;
 		
 		$scope.displayConsole = function(index){
+			console.log(temp[index]);
+		};
+		
+		$scope.runMouseOver = function(index){
 			console.log(temp[index]);
 		};
 			
