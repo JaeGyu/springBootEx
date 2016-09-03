@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" />
+<style type="text/css">
+</style>
+</head>
+<body ng-controller="Controller">
+	
+	<div>
+		{{d | date:small}}
+	</div>
+	
+<script>
+	var app = angular.module("myApp",[]);
+	
+	app.controller("Controller",function($scope){
+		$scope.d = new Date();	
+	});
+</script>
+</body>
+</html>
