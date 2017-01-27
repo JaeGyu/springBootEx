@@ -1,8 +1,9 @@
 spring:
   datasource:
     driverClassName: org.h2.Driver
-    #url: jdbc:h2:file:/home/worb/db/customer
-    url: jdbc:h2:file:c:\home\worb\db\customer
+#    url: jdbc:h2:file:/Users/jaegyuhan/dev/db/problem
+#    url: jdbc:h2:file:/home/worb/db/customer
+#    url: jdbc:h2:file:c:\home\worb\db\customer
     username: sa
     password: 
   jpa:
