@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProblemController {
 
 	@Autowired
-	private Service service;
+	private ProblemService service;
 
 	@RequestMapping(value = "/next_problem", method = RequestMethod.GET)
 	public Object nextProblem() {
